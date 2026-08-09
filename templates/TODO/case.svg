@@ -1,0 +1,15 @@
+<g transform="translate({{indent}} {{top_margin}})">
+  <g>
+    <rect width="{{width}}" height="12"/>
+    <use href="#{{indicator_type}}" />
+    <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(20 6.35)">
+      <tspan x="0" y="6">{{title}}</tspan>
+    </text>
+  </g>
+  <g transform="translate(0 20)">
+    <rect width="{{width}}" height="{{description_height}}" fill="#333333" fill-rule="evenodd" fill-opacity="0.5" />
+    <text fill="#757575" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(0 0.35)">
+      {{description}}
+    </text>
+  </g>
+</g>

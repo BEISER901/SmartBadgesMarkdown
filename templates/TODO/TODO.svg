@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="212" height="{{height}}" viewBox="0 0 212 {{height}}" fill="none" xmlns="http://www.w3.org/2000/svg">
+  {{defs_indicators}}
+  <defs>
+    <image id="image_2" width="640" height="359" p3:href="{{bg_base64}}" xmlns:p3="http://www.w3.org/1999/xlink" />
+    <pattern id="pattern_3" width="3.2" height="1.718">
+      <use p4:href="#image_2" xmlns:p4="http://www.w3.org/1999/xlink" />
+    </pattern>
+    <filter id="filter_1"
+            color-interpolation-filters="sRGB"
+            x="-2.667"
+            y="-2.667"
+            width="4.667"
+            height="4.667">
+
+        <feFlood
+            flood-color="{{color}}"
+            flood-opacity="1"
+            result="glowColor"
+        />
+
+        <feComposite
+            in="glowColor"
+            in2="SourceAlpha"
+            operator="in"
+            result="glow"
+        />
+
+        <feGaussianBlur
+            in="glow"
+            stdDeviation="2"
+            result="blur"
+        />
+
+        <feBlend
+            in="blur"
+            in2="SourceGraphic"
+            mode="screen"
+        />
+    </filter>
+    <clipPath id="clip_path_5">
+      <rect width="200" height="{{clip_height}}" rx="15" />
+    </clipPath>
+    <filter color-interpolation-filters="sRGB" x="-2.667" y="-2.667" width="4.667" height="4.667" id="filter_6">
+      <feFlood flood-opacity="0" result="BackgroundImageFix_1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" in="SourceAlpha" />
+      <feMorphology radius="1" operator="dilate" in="SourceAlpha" />
+      <feOffset dx="0" dy="0" />
+      <feGaussianBlur stdDeviation="2" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.208 0 0 0 0 0.69 0 0 0 0 0 0 0 0 1 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix_1" result="Shadow_2" />
+      <feBlend mode="normal" in="SourceGraphic" in2="Shadow_2" result="Shape_3" />
+    </filter>
+    <filter color-interpolation-filters="sRGB" x="-2.667" y="-2.667" width="4.667" height="4.667" id="filter_7">
+      <feFlood flood-opacity="0" result="BackgroundImageFix_1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" in="SourceAlpha" />
+      <feMorphology radius="1" operator="dilate" in="SourceAlpha" />
+      <feOffset dx="0" dy="0" />
+      <feGaussianBlur stdDeviation="2" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.208 0 0 0 0 0.69 0 0 0 0 0 0 0 0 1 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix_1" result="Shadow_2" />
+      <feBlend mode="normal" in="SourceGraphic" in2="Shadow_2" result="Shape_3" />
+    </filter>
+    <filter color-interpolation-filters="sRGB" x="-2.667" y="-2.667" width="4.667" height="4.667" id="filter_8">
+      <feFlood flood-opacity="0" result="BackgroundImageFix_1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" in="SourceAlpha" />
+      <feMorphology radius="1" operator="dilate" in="SourceAlpha" />
+      <feOffset dx="0" dy="0" />
+      <feGaussianBlur stdDeviation="2" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.208 0 0 0 0 0.69 0 0 0 0 0 0 0 0 1 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix_1" result="Shadow_2" />
+      <feBlend mode="normal" in="SourceGraphic" in2="Shadow_2" result="Shape_3" />
+    </filter>
+    <filter color-interpolation-filters="sRGB" x="-2.667" y="-2.667" width="4.667" height="4.667" id="filter_9">
+      <feFlood flood-opacity="0" result="BackgroundImageFix_1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" in="SourceAlpha" />
+      <feMorphology radius="1" operator="dilate" in="SourceAlpha" />
+      <feOffset dx="0" dy="0" />
+      <feGaussianBlur stdDeviation="2" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.208 0 0 0 0 0.69 0 0 0 0 0 0 0 0 1 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix_1" result="Shadow_2" />
+      <feBlend mode="normal" in="SourceGraphic" in2="Shadow_2" result="Shape_3" />
+    </filter>
+    <filter color-interpolation-filters="sRGB" x="-2.667" y="-2.667" width="4.667" height="4.667" id="filter_10">
+      <feFlood flood-opacity="0" result="BackgroundImageFix_1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" in="SourceAlpha" />
+      <feMorphology radius="1" operator="dilate" in="SourceAlpha" />
+      <feOffset dx="0" dy="0" />
+      <feGaussianBlur stdDeviation="2" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.208 0 0 0 0 0.69 0 0 0 0 0 0 0 0 1 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix_1" result="Shadow_2" />
+      <feBlend mode="normal" in="SourceGraphic" in2="Shadow_2" result="Shape_3" />
+    </filter>
+    <style type="text/css">@import url(https://fonts.googleapis.com/css?family=Verdana)</style>
+  </defs>
+  <g clip-path="url(#clip_path_5)" transform="translate(6 2)" filter="url(#filter_4)">
+    <image
+      href="{{bg_base64}}"
+      x="0"
+      y="0"
+      width="200"
+      height="{{clip_height}}"
+      preserveAspectRatio="xMidYMid slice"
+  />
+   <rect id="path_1"
+        x="0"
+        y="0"
+        width="200"
+        height="{{clip_height}}" 
+        fill="#000000"
+        fill-rule="evenodd"
+        fill-opacity="0.851"/>
+    <g>
+      <g>
+        <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(16 8.354)">
+          <tspan x="0" y="6.032">{{title}}</tspan>
+        </text>
+      </g>
+      <g transform="translate(100 0)">
+        <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(15 8.354)">
+          <tspan x="0" y="6.032">{{updated_at}}</tspan>
+        </text>
+      </g>
+    </g>
+    {{cases}}
+    <g transform="translate(0 {{fotter_y}})">
+      {{indicator_info_section}}
+<!--       <g>
+        <g>
+          <g>
+            <g transform="translate(6.5 6.5)">
+              <path d="M0 3.5C0 1.567 1.567 0 3.5 0C5.433 0 7 1.567 7 3.5C7 5.433 5.433 7 3.5 7C1.567 7 0 5.433 0 3.5Z" fill="none" stroke-width="0.5" stroke="#1A5700" />
+              <path d="M0 2.33333C0 1.04467 1.04467 0 2.33333 0C3.622 0 4.66667 1.04467 4.66667 2.33333C4.66667 3.622 3.622 4.66667 2.33333 4.66667C1.04467 4.66667 0 3.622 0 2.33333Z" fill="#35B000" fill-rule="evenodd" filter="url(#filter_10)" transform="translate(1.167 1.167)" />
+            </g>
+          </g>
+          <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(20 6.354)">
+            <tspan x="0" y="6.032">- TODO:IndicatorInfo</tspan>
+          </text>
+        </g>
+      </g>
+      <g transform="translate(0 20)">
+        <g>
+          <g>
+            <g transform="translate(6.5 6.5)">
+              <path d="M0 2.33333C0 1.04467 1.04467 0 2.33333 0C3.622 0 4.66667 1.04467 4.66667 2.33333C4.66667 3.622 3.622 4.66667 2.33333 4.66667C1.04467 4.66667 0 3.622 0 2.33333Z" fill="#B00000" fill-rule="evenodd" transform="translate(1.167 1.167)" />
+            </g>
+          </g>
+          <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(20 6.354)">
+            <tspan x="0" y="6.032">- TODO:IndicatorInfo</tspan>
+          </text>
+        </g>
+      </g> -->
+    </g>
+  </g>
+</svg>

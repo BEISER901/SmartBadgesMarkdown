@@ -1,0 +1,6 @@
+<g transform="translate(0 {{top_margin}})">
+  <use href="#{{indicator_type}}" />
+  <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(20 6.354)">
+    {{svg_info}}
+  </text>
+</g>

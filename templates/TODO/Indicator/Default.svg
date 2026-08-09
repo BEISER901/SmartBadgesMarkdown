@@ -1,0 +1,39 @@
+<svg id="{{id}}" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+      <filter 
+          id="filter_1" 
+          color-interpolation-filters="sRGB"
+          x="-100%"
+          y="-100%"
+          width="300%"
+          height="300%">
+          
+          <feFlood 
+              flood-color="{{color}}" 
+              flood-opacity="1" 
+              result="color"/>
+
+          <feComposite 
+              in="color" 
+              in2="SourceAlpha" 
+              operator="in" 
+              result="shadow"/>
+
+          <feGaussianBlur 
+              in="shadow" 
+              stdDeviation="2.5" 
+              result="blur"/>
+
+          <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+      </filter> 
+  </defs>
+  <g>
+    <g transform="translate(6.5 6.5)">
+      <path d="M0 3.5C0 1.567 1.567 0 3.5 0C5.433 0 7 1.567 7 3.5C7 5.433 5.433 7 3.5 7C1.567 7 0 5.433 0 3.5Z" fill="none" stroke-width="0.5" stroke="{{stroke}}" />
+      <path d="M0 2.33333C0 1.04467 1.04467 0 2.33333 0C3.622 0 4.66667 1.04467 4.66667 2.33333C4.66667 3.622 3.622 4.66667 2.33333 4.66667C1.04467 4.66667 0 3.622 0 2.33333Z" fill="{{color}}" fill-rule="evenodd" filter="url(#filter_1)" transform="translate(1.167 1.167)" />
+    </g>
+  </g>
+</svg>
