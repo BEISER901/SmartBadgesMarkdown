@@ -232,6 +232,7 @@ export default async function handler(req, res) {
 
     const data = { ...req.query };
 
+
     const sourceUrl = new URL(data.src);
 
     if (sourceUrl.hostname === "raw.githubusercontent.com") {
@@ -273,7 +274,7 @@ export default async function handler(req, res) {
 
     templateGenerator.tasks =
         generateTasks(mergedData.tasks);
-    templateGenerator.title = data.title;
+    templateGenerator.title = mergedData.title;
 
     const svg = createWidget(templateGenerator);
 
