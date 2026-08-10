@@ -140,7 +140,7 @@ const todoStockTemplate = fs.readFileSync(
 
 const indentCoeff = 20;
 
-const generateIndicatorsDefs = (indicators) =>
+const generateIndicatorsDefs = (indicators, todoWidth) =>
     indicators.map(({ id, type, color }) =>
         indicatorsTemplate[type.toLowerCase()]
             .replaceAll("{{color}}", escapeXml(color))
@@ -148,12 +148,12 @@ const generateIndicatorsDefs = (indicators) =>
             .replaceAll("{{id}}", escapeXml(id))
     );
 
-const generateTasks = (tasks) => {
+const generateTasks = (tasks, todoWidth) => {
     var totalHeight = 24;    
     tasks = tasks.map(({ name, description, indicator, indent }, i) => {
         const headerHeight = 20;
         const descriptionHeight = 8;
-        const textWraped = wrapText(description, String(200-indent*indentCoeff));
+        const textWraped = wrapText(description, String(todoWidth-indent*indentCoeff));
         const descriptionSvg = textWraped
             .map((line, i) =>
                 `<tspan x="0" y="${6 + i * 7}">${escapeXml(line)}</tspan>`
@@ -165,7 +165,7 @@ const generateTasks = (tasks) => {
         return caseTemplate
             .replaceAll("{{indent}}", String(indent * indentCoeff))
             .replaceAll("{{top_margin}}", String(lastHeight))
-            .replaceAll("{{width}}", String(200-indent*indentCoeff))
+            .replaceAll("{{width}}", String(todoWidth-indent*indentCoeff))
             .replaceAll("{{description_height}}", String(descriptionHeight * textWraped.length))
             .replaceAll("{{indicator_type}}", indicator.toLowerCase())
             .replaceAll("{{title}}", name)
@@ -174,11 +174,11 @@ const generateTasks = (tasks) => {
     );
     return { totalHeight, tasks }
 }
-const generateIndicatorsInfo = (indicators) => {
+const generateIndicatorsInfo = (indicators, todoWidth) => {
     var totalHeight = 0;    
     indicators = indicators.map(({id, description}, i) => {
         const descriptionHeight = 7.2;
-        const textWraped = wrapText(" - "+ description, String(200-24));
+        const textWraped = wrapText(" - "+ description, String(todoWidth-24));
         const descriptionSvg = textWraped
             .map((line, i) =>
                 `<tspan x="0" y="${6 + i * 7}">${escapeXml(line)}</tspan>`
@@ -215,9 +215,12 @@ const createWidget = (templateGenerator) => {
             templateGenerator.indicators_info.indicators.join("\n")
         )
         .replaceAll("{{height}}", String(widgetHeight))
+        .replaceAll("{{width}}", String(templateGenerator.todo_width))
         .replaceAll("{{fotter_y}}", String(widgetHeight - templateGenerator.indicators_info.totalHeight - 24))
         .replaceAll("{{clip_height}}", String(widgetHeight-12))
+        .replaceAll("{{clip_width}}", String(templateGenerator.clip_width))
         .replaceAll("{{bg_base64}}", bg_base64)
+        .replaceAll("{{updated_at_x}}", String(templateGenerator.clip_width - 100))
         .replaceAll("{{updated_at}}", new Date().toISOString().slice(0, 16) + "Z")
         .replaceAll("{{title}}", templateGenerator.title)
 
@@ -251,6 +254,7 @@ export default async function handler(req, res) {
         ...srcData,
         ...data
     };
+    mergedData.width = Number(mergedData.width??200)
 
     templateGenerator.defs_indicators =
         generateIndicatorsDefs(
@@ -260,7 +264,8 @@ export default async function handler(req, res) {
                     type,
                     color
                 })
-            )
+            ),
+            mergedData.width
         );
 
     templateGenerator.indicators_info =
@@ -270,10 +275,15 @@ export default async function handler(req, res) {
                 id,
                 description
             })
-        ));
+        ), mergedData.width);
 
     templateGenerator.tasks =
-        generateTasks(mergedData.tasks);
+        generateTasks(
+            mergedData.tasks,
+            mergedData.width
+        );
+    templateGenerator.clip_width = mergedData.width;
+    templateGenerator.todo_width = mergedData.width + 12;
     templateGenerator.title = mergedData.title;
 
     const svg = createWidget(templateGenerator);

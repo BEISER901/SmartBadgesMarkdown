@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg width="212" height="{{height}}" viewBox="0 0 212 {{height}}" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="{{width}}" height="{{height}}" viewBox="0 0 {{width}} {{height}}" fill="none" xmlns="http://www.w3.org/2000/svg">
   {{defs_indicators}}
   <defs>
     <image id="image_2" width="640" height="359" p3:href="{{bg_base64}}" xmlns:p3="http://www.w3.org/1999/xlink" />
@@ -39,7 +39,7 @@
         />
     </filter>
     <clipPath id="clip_path_5">
-      <rect width="200" height="{{clip_height}}" rx="15" />
+      <rect width="{{clip_width}}" height="{{clip_height}}" rx="15" />
     </clipPath>
     <filter color-interpolation-filters="sRGB" x="-2.667" y="-2.667" width="4.667" height="4.667" id="filter_6">
       <feFlood flood-opacity="0" result="BackgroundImageFix_1" />
@@ -98,14 +98,14 @@
       href="{{bg_base64}}"
       x="0"
       y="0"
-      width="200"
+      width="{{clip_width}}"
       height="{{clip_height}}"
       preserveAspectRatio="xMidYMid slice"
   />
    <rect id="path_1"
         x="0"
         y="0"
-        width="200"
+        width="{{clip_width}}"
         height="{{clip_height}}" 
         fill="#000000"
         fill-rule="evenodd"
@@ -116,7 +116,7 @@
           <tspan x="0" y="6.032">{{title}}</tspan>
         </text>
       </g>
-      <g transform="translate(100 0)">
+      <g transform="translate({{updated_at_x}} 0)">
         <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(15 8.354)">
           <tspan x="0" y="6.032">{{updated_at}}</tspan>
         </text>
@@ -125,31 +125,6 @@
     {{cases}}
     <g transform="translate(0 {{fotter_y}})">
       {{indicator_info_section}}
-<!--       <g>
-        <g>
-          <g>
-            <g transform="translate(6.5 6.5)">
-              <path d="M0 3.5C0 1.567 1.567 0 3.5 0C5.433 0 7 1.567 7 3.5C7 5.433 5.433 7 3.5 7C1.567 7 0 5.433 0 3.5Z" fill="none" stroke-width="0.5" stroke="#1A5700" />
-              <path d="M0 2.33333C0 1.04467 1.04467 0 2.33333 0C3.622 0 4.66667 1.04467 4.66667 2.33333C4.66667 3.622 3.622 4.66667 2.33333 4.66667C1.04467 4.66667 0 3.622 0 2.33333Z" fill="#35B000" fill-rule="evenodd" filter="url(#filter_10)" transform="translate(1.167 1.167)" />
-            </g>
-          </g>
-          <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(20 6.354)">
-            <tspan x="0" y="6.032">- TODO:IndicatorInfo</tspan>
-          </text>
-        </g>
-      </g>
-      <g transform="translate(0 20)">
-        <g>
-          <g>
-            <g transform="translate(6.5 6.5)">
-              <path d="M0 2.33333C0 1.04467 1.04467 0 2.33333 0C3.622 0 4.66667 1.04467 4.66667 2.33333C4.66667 3.622 3.622 4.66667 2.33333 4.66667C1.04467 4.66667 0 3.622 0 2.33333Z" fill="#B00000" fill-rule="evenodd" transform="translate(1.167 1.167)" />
-            </g>
-          </g>
-          <text fill="#FFFFFF" font-family="Verdana" font-size="6" font-weight="normal" transform="translate(20 6.354)">
-            <tspan x="0" y="6.032">- TODO:IndicatorInfo</tspan>
-          </text>
-        </g>
-      </g> -->
     </g>
   </g>
 </svg>
