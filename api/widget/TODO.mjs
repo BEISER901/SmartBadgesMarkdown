@@ -38,7 +38,7 @@ function ParseTodo(todo) {
         if(isSectionIndicators) {
             if(trimLine != "") {
                 // Indicator
-                const [indicator, description, color, type] = trimLine.split("//")
+                const [indicator, description, color, type] = trimLine.split("//").map(x => x.trim())
                 todoJson.indicators[indicator] = {
                     type: type??"default",
                     color,
