@@ -22,6 +22,65 @@ function escapeXml(value) {
         .replaceAll("'", "&apos;");
 }
 
+function IsTodo(text) {
+    return text.startsWith("@TODO 1.0");
+}
+function ParseTodo(todo) {
+    const todoJson = {
+        "title": "",
+        "tasks": [],
+        "indicators": {}
+    }
+    let taskIndex = -1
+    let isSectionIndicators = false
+    for (let line of todo.slice("@TODO 1.0".length).split("\n")) {
+        const trimLine = line.trim();
+        if(isSectionIndicators) {
+            if(trimLine != "") {
+                // Indicator
+                const [indicator, description, color, type] = trimLine.split("//")
+                todoJson.indicators[indicator] = {
+                    type: type??"default",
+                    color,
+                    description
+                }
+            }
+        }
+        else {
+            if(trimLine.startsWith("*") && trimLine.includes(" - ")) {
+                // Title
+                taskIndex++
+                let indent = -1;
+                while (trimLine[indent + 1] === "*")
+                    indent++;
+
+                const indicatorPrefixIndex = trimLine
+                    .lastIndexOf(" - ")
+                const [title, indicator] = [trimLine.slice(indent + 1, indicatorPrefixIndex), trimLine.slice(indicatorPrefixIndex + 3)]
+                todoJson.tasks[taskIndex] = { 
+                    "name": title,
+                    "description": "",
+                    indicator,
+                    indent
+                }
+            } 
+            else if(trimLine != "") {
+                if(trimLine == "!!INDICATORS!!") {
+                    isSectionIndicators = true
+                }
+                else if(taskIndex+1) {
+                    // Description
+                    todoJson.tasks[taskIndex].description += "\n" + trimLine
+                } else {
+                    // TODO Title
+                    todoJson.title = trimLine
+                }
+            }
+        }
+    }
+    return todoJson
+}
+
 function darkenColor(hex, amount = 0.45) {
     const r = Math.floor(parseInt(hex.slice(1, 3), 16) * amount);
     const g = Math.floor(parseInt(hex.slice(3, 5), 16) * amount);
@@ -247,8 +306,15 @@ export default async function handler(req, res) {
     if (!response.ok) {
         throw new Error(`Failed to fetch source: HTTP ${response.status}`);
     }
+    const srcTextData = await response.text();
 
-    const srcData = await response.json();
+    let srcData;
+
+    if (IsTodo(srcTextData)) {
+        srcData = ParseTodo(srcTextData);
+    } else {
+        srcData = JSON.parse(srcTextData);
+    }
 
     const mergedData = {
         ...srcData,
