@@ -29,7 +29,7 @@ function ParseTodo(todo) {
     const todoJson = {
         "title": "",
         "tasks": [],
-        "indicators": {}
+        "case_indicators": {}
     }
     let taskIndex = -1
     let isSectionIndicators = false
@@ -39,7 +39,7 @@ function ParseTodo(todo) {
             if(trimLine != "") {
                 // Indicator
                 const [indicator, description, color, type] = trimLine.split("//").map(x => x.trim())
-                todoJson.indicators[indicator] = {
+                todoJson.case_indicators[indicator] = {
                     type: type??"default",
                     color,
                     description
@@ -70,7 +70,7 @@ function ParseTodo(todo) {
                 }
                 else if(taskIndex+1) {
                     // Description
-                    todoJson.tasks[taskIndex].description += "\n" + trimLine
+                    todoJson.tasks[taskIndex].description = (todoJson.tasks[taskIndex].description + "\n" + trimLine).trim()
                 } else {
                     // TODO Title
                     todoJson.title = trimLine
@@ -121,52 +121,54 @@ const indicatorsTemplate = Object.fromEntries(
     ])
 );
 function wrapText(text, maxWidth = 190) {
-    const words = text.split(/\s+/);
     const lines = [];
 
-    let currentLine = "";
+    for (const line of text.split("\n")) {
+        const words = line.split(/\s+/);
+        let currentLine = "";
 
-    for (const word of words) {
-        const testLine = currentLine
-            ? `${currentLine} ${word}`
-            : word;
+        for (const word of words) {
+            const testLine = currentLine
+                ? `${currentLine} ${word}`
+                : word;
 
-        if (measureText(testLine).width <= maxWidth) {
-            currentLine = testLine;
-            continue;
+            if (measureText(testLine).width <= maxWidth) {
+                currentLine = testLine;
+                continue;
+            }
+
+            if (currentLine) {
+                lines.push(currentLine);
+                currentLine = "";
+            }
+
+            if (measureText(word).width <= maxWidth) {
+                currentLine = word;
+                continue;
+            }
+
+            let part = "";
+
+            for (const char of word) {
+                const withHyphen = part + char + "-";
+
+                if (
+                    measureText(withHyphen).width > maxWidth &&
+                    part
+                ) {
+                    lines.push(part + "-");
+                    part = char;
+                } else {
+                    part += char;
+                }
+            }
+
+            currentLine = part;
         }
 
         if (currentLine) {
             lines.push(currentLine);
-            currentLine = "";
         }
-
-        if (measureText(word).width <= maxWidth) {
-            currentLine = word;
-            continue;
-        }
-
-        let part = "";
-
-        for (const char of word) {
-            const withHyphen = part + char + "-";
-
-            if (
-                measureText(withHyphen).width > maxWidth &&
-                part
-            ) {
-                lines.push(part + "-");
-                part = char;
-            } else {
-                part += char;
-            }
-        }
-
-        currentLine = part;
-    }
-
-    if (currentLine) {
-        lines.push(currentLine);
     }
 
     return lines;
@@ -213,6 +215,7 @@ const generateTasks = (tasks, todoWidth) => {
         const headerHeight = 20;
         const descriptionHeight = 8;
         const textWraped = wrapText(description, String(todoWidth-indent*indentCoeff));
+        
         const descriptionSvg = textWraped
             .map((line, i) =>
                 `<tspan x="0" y="${6 + i * 7}">${escapeXml(line)}</tspan>`
@@ -320,6 +323,7 @@ export default async function handler(req, res) {
         ...srcData,
         ...data
     };
+    
     mergedData.width = Number(mergedData.width??200)
 
     templateGenerator.defs_indicators =
